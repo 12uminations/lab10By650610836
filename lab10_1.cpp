@@ -2,10 +2,14 @@
 #include<iomanip> //For using setw(), setprecision(), ...
 using namespace std;
 
-int main(){	
+int main(){
+    float iloan,irate,money;
 	cout << "Enter initial loan: ";
+	cin >> iloan;
 	cout << "Enter interest rate per year (%): ";
+	cin >> irate;
 	cout << "Enter amount you can pay per year: ";
+	cin >> money;
 
 	//use 'setw' to set width of table and 'left' to set left-alignment
 	//you can change input argument of 'setw()' to see the effect
@@ -17,17 +21,28 @@ int main(){
 	cout << setw(13) << left << "Payment";
 	cout << setw(13) << left << "NewBalance";
 	cout << "\n";
-	
+	float newB = 1;
+	float prevB = iloan;
 	//use 'fixed' and 'setprecision' to fix the number of decimal digits for displaying
 	//you can change input argument of 'setprecision()' to see the effect
-	cout << fixed << setprecision(2); 
-	cout << setw(13) << left << 1; 
-	cout << setw(13) << left << 1000.0;
-	cout << setw(13) << left << 50.0;
-	cout << setw(13) << left << 1050.0;
-	cout << setw(13) << left << 100.0;
-	cout << setw(13) << left << 950.0;
-	cout << "\n";	
-	
+	for(int i=0;newB != 0;i++){
+	    float interest = (irate/100)*iloan;
+	    float total = prevB+interest;
+	    float newB = total - money;
+	    cout << fixed << setprecision(2); 
+	    cout << setw(13) << left << i; 
+	    cout << setw(13) << left << prevB;
+	    cout << setw(13) << left << interest;
+	    cout << setw(13) << left << total;
+	    cout << setw(13) << left << money;
+	    cout << setw(13) << left << newB;
+	    cout << "\n";	
+	    newB=newB;
+	    prevB = newB;
+	    if(total < 100){
+	      money = total;
+	      newB=0;
+	    }
+	}
 	return 0;
 }
