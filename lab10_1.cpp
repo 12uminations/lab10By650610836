@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-    float iloan,irate,money;
+    double iloan,irate,money;
 	cout << "Enter initial loan: ";
 	cin >> iloan;
 	cout << "Enter interest rate per year (%): ";
@@ -21,14 +21,17 @@ int main(){
 	cout << setw(13) << left << "Payment";
 	cout << setw(13) << left << "NewBalance";
 	cout << "\n";
-	float newB = 1;
-	float prevB = iloan;
+	double newB = 1;
+	double prevB = iloan;
 	//use 'fixed' and 'setprecision' to fix the number of decimal digits for displaying
 	//you can change input argument of 'setprecision()' to see the effect
-	for(int i=0;newB != 0;i++){
-	    float interest = (irate/100)*iloan;
-	    float total = prevB+interest;
-	    float newB = total - money;
+	for(int i=1;newB != 0;i++){
+	    double interest = (irate/100)*prevB;
+	    double total = prevB+interest;
+	    double newB = total - money;
+	    if(total < money){
+	        money = total;
+	        newB=0;
 	    cout << fixed << setprecision(2); 
 	    cout << setw(13) << left << i; 
 	    cout << setw(13) << left << prevB;
@@ -36,13 +39,21 @@ int main(){
 	    cout << setw(13) << left << total;
 	    cout << setw(13) << left << money;
 	    cout << setw(13) << left << newB;
-	    cout << "\n";	
+	    cout << "\n";
+	    break;
+	    }
+	    cout << fixed << setprecision(2); 
+	    cout << setw(13) << left << i; 
+	    cout << setw(13) << left << prevB;
+	    cout << setw(13) << left << interest;
+	    cout << setw(13) << left << total;
+	    cout << setw(13) << left << money;
+	    cout << setw(13) << left << newB;
+	    cout << "\n";
 	    newB=newB;
 	    prevB = newB;
-	    if(total < 100){
-	      money = total;
-	      newB=0;
-	    }
+
+	    
 	}
 	return 0;
 }
