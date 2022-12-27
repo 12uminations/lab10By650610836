@@ -13,7 +13,6 @@ int printO(int N,int M){
     }
     return 0;
 }
-
 int main(){
 	
 	printO(2,2);
